@@ -1,14 +1,15 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{AC917C2B-5870-48AD-981D-668AD3E4A533}</ProjectGuid>
-        <MainSource>SynEdit_R.dpk</MainSource>
-        <Base>True</Base>
+        <ProjectGuid>{6A19C132-8308-437E-BFF4-B2C9FF204C97}</ProjectGuid>
+        <ProjectType>CppPackage</ProjectType>
+        <MainSource>SynEdit_BCB.cpp</MainSource>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <TargetedPlatforms>3</TargetedPlatforms>
-        <AppType>Package</AppType>
+        <ProjectVersion>18.6</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
-        <ProjectVersion>18.3</ProjectVersion>
+        <Base>True</Base>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Package</AppType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -23,12 +24,24 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
         <Cfg_1>true</Cfg_1>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
+        <Cfg_1_Win64>true</Cfg_1_Win64>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
         <Cfg_2>true</Cfg_2>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
@@ -39,199 +52,163 @@
         <Cfg_2>true</Cfg_2>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
+        <Cfg_2_Win64>true</Cfg_2_Win64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <SanitizedProjectName>SynEdit_R</SanitizedProjectName>
-        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
-        <RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+        <SanitizedProjectName>SynEdit_BCB</SanitizedProjectName>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <DCC_ImageBase>00400000</DCC_ImageBase>
-        <DCC_WriteableConstants>true</DCC_WriteableConstants>
-        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <DCC_Description>SynEdit component suite runtime</DCC_Description>
-        <GenPackage>true</GenPackage>
-        <DCC_S>false</DCC_S>
-        <DCC_N>false</DCC_N>
-        <GenDll>true</GenDll>
-        <DCC_K>false</DCC_K>
-        <VerInfo_Locale>1031</VerInfo_Locale>
-        <DCC_F>false</DCC_F>
-        <DCC_E>false</DCC_E>
+        <IncludePath>..\..\Source\;$(BDS)\include\vcl;$(IncludePath)</IncludePath>
+        <LinkPackageStatics>rtl.lib;vcldb.lib;adortl.lib;bdertl.lib;vcldbx.lib;ibxpress.lib;dsnap.lib;dsnapcon.lib;teeui.lib;teedb.lib;tee.lib;bcbsmp.lib;inetdbbde.lib;inetdbxpress.lib;dbexpress.lib;bcbie.lib;soaprtl.lib;dbxcds.lib;indycore.lib;indysystem.lib;bcboffice2k.lib</LinkPackageStatics>
+        <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+        <DCC_IncludePath>.\;$(BDS)\lib;$(BDS)\lib\obj;$(DCC_IncludePath)</DCC_IncludePath>
+        <BCC_PCHCache>true</BCC_PCHCache>
+        <ILINK_AppType>Windows</ILINK_AppType>
+        <DCC_UnitSearchPath>.\;$(BDS)\lib;$(BDS)\lib\obj;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <BRCC_IncludePath>..\..\Source;$(BDS)\include;$(BDS)\include\vcl;$(BRCC_IncludePath)</BRCC_IncludePath>
+        <BRCC_UserSuppliedOptions> -I..\..\Source;$(BDS)\include;$(BDS)\include\vcl;$(BDS)\include\dinkumware</BRCC_UserSuppliedOptions>
+        <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
+        <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+        <TASM_IncludePath>..\..\Source;$(BDS)\include;$(BDS)\include\vcl;$(TASM_IncludePath)</TASM_IncludePath>
+        <UsePackages>true</UsePackages>
+        <BCC_IncludePath>..\..\Source;$(BDS)\include;$(BDS)\include\vcl;$(BCC_IncludePath)</BCC_IncludePath>
+        <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
+        <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+        <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+        <BCC_GenerateMultithreaded>true</BCC_GenerateMultithreaded>
+        <OutputExt>bpl</OutputExt>
+        <FinalOutputDir>.</FinalOutputDir>
+        <ILINK_WinAppType>Package</ILINK_WinAppType>
+        <TASM_AdditionalSwitches> /w2</TASM_AdditionalSwitches>
+        <AllPackageLibs>rtl.lib;vcldb.lib;adortl.lib;vcldbx.lib;dsnap.lib;dsnapcon.lib;teeui.lib;teedb.lib;tee.lib;dsnapcon.lib;bcbsmp.lib;inetdbbde.lib;inetdbxpress.lib;dbexpress.lib;bcbie.lib;soaprtl.lib;dbxcds.lib;indycore.lib;indysystem.lib;bcboffice2k.lib</AllPackageLibs>
+        <ILINK_Description>SynEdit component suite</ILINK_Description>
+        <ILINK_LibraryPath>..\..\Source\;$(BDS)\include\vcl;$(BDS)\lib\obj;$(BDS)\lib;$(BDS)\Source\Toolsapi;$(BDS)\lib\psdk;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <Multithreaded>true</Multithreaded>
+        <DCC_AdditionalSwitches> -M -LUDesignIDE</DCC_AdditionalSwitches>
+        <DynamicRTL>true</DynamicRTL>
+        <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+        <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <BCC_UserSuppliedOptions> -Vx -r- -k -Ve</BCC_UserSuppliedOptions>
+        <TASM_Defines>_DEBUG;$(TASM_Defines)</TASM_Defines>
+        <BRCC_Defines>_DEBUG;$(BRCC_Defines)</BRCC_Defines>
+        <IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <TASM_Defines>_DEBUG;$(TASM_Defines)</TASM_Defines>
+        <BRCC_Defines>_DEBUG;$(BRCC_Defines)</BRCC_Defines>
+        <IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
-        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
-        <DCC_DebugInformation>0</DCC_DebugInformation>
-        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
-        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <ILINK_LibraryPath>$(BDS)\lib\debug;$(ILINK_LibraryPath);$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IntermediateOutputDir>Debug_Build</IntermediateOutputDir>
+        <DCC_Define>DEBUG;$(DCC_Define);$(DCC_Define)</DCC_Define>
+        <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
+        <TASM_Debugging>Full</TASM_Debugging>
+        <DCC_AdditionalSwitches> -M -V -LUDesignIDE</DCC_AdditionalSwitches>
+        <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <BCC_Defines>_DEBUG;$(BCC_Defines);$(BCC_Defines)</BCC_Defines>
+        <BCC_UserSuppliedOptions> -Vx -r- -k -Ve -k</BCC_UserSuppliedOptions>
+        <LinkPackageStatics>rtl.lib;vcldb.lib;adortl.lib;vcldbx.lib;dsnap.lib;dsnapcon.lib;teeui.lib;teedb.lib;tee.lib;bcbsmp.lib;inetdbbde.lib;inetdbxpress.lib;dbexpress.lib;bcbie.lib;soaprtl.lib;dbxcds.lib;indycore.lib;indysystem.lib;bcboffice2k.lib</LinkPackageStatics>
+        <DCC_UnitSearchPath>..\..\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DllSuffix>RX2</DllSuffix>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
+        <BCC_Defines>_DEBUG;$(BCC_Defines);$(BCC_Defines)</BCC_Defines>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
-        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
-        <DCC_Optimize>false</DCC_Optimize>
-        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+        <IntermediateOutputDir>Release_Build</IntermediateOutputDir>
+        <DCC_AdditionalSwitches> -M -$O+ -LUDesignIDE</DCC_AdditionalSwitches>
+        <TASM_Debugging>None</TASM_Debugging>
+        <ILINK_LibraryPath>$(BDS)\lib\release;$(ILINK_LibraryPath);$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <BCC_InlineFunctionExpansion>true</BCC_InlineFunctionExpansion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <DllSuffix>102T</DllSuffix>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
+        <BCC_Defines>NDEBUG;$(BCC_Defines);$(BCC_Defines)</BCC_Defines>
+        <BCC_UserSuppliedOptions> -Vx -r- -k -Ve -r</BCC_UserSuppliedOptions>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <BCC_Defines>NDEBUG;$(BCC_Defines);$(BCC_Defines)</BCC_Defines>
     </PropertyGroup>
     <ItemGroup>
-        <DelphiCompile Include="$(MainSource)">
-            <MainSource>MainSource</MainSource>
+        <PackageImport Include="bcbsmp.bpi">
+            <BuildOrder>38</BuildOrder>
+            <BuildOrder>3</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="dbrtl.bpi">
+            <BuildOrder>14</BuildOrder>
+            <BuildOrder>11</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="designide.bpi">
+            <BuildOrder>29</BuildOrder>
+            <BuildOrder>0</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="rtl.bpi">
+            <BuildOrder>8</BuildOrder>
+            <BuildOrder>5</BuildOrder>
+        </PackageImport>
+        <CppCompile Include="SynEdit_BCB.cpp">
+            <BuildOrder>9</BuildOrder>
+            <BuildOrder>2</BuildOrder>
+        </CppCompile>
+        <PackageImport Include="vcl.bpi">
+            <BuildOrder>8</BuildOrder>
+            <BuildOrder>7</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="vcldb.bpi">
+            <BuildOrder>17</BuildOrder>
+            <BuildOrder>10</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="vclx.bpi">
+            <BuildOrder>12</BuildOrder>
+            <BuildOrder>11</BuildOrder>
+        </PackageImport>
+        <DelphiCompile Include="..\..\Source\SynEditPropertyReg.pas">
+            <BuildOrder>26</BuildOrder>
+            <BuildOrder>1</BuildOrder>
         </DelphiCompile>
-        <DCCReference Include="vcl.dcp"/>
-        <DCCReference Include="vcldb.dcp"/>
-        <DCCReference Include="vclx.dcp"/>
-        <DCCReference Include="rtl.dcp"/>
-        <DCCReference Include="..\..\Source\SynTextDrawer.pas"/>
-        <DCCReference Include="..\..\Source\SynAutoCorrect.pas"/>
-        <DCCReference Include="..\..\Source\SynAutoCorrectEditor.pas">
-            <Form>frmAutoCorrectEditor</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\Source\SynCompletionProposal.pas"/>
-        <DCCReference Include="..\..\Source\SynDBEdit.pas"/>
-        <DCCReference Include="..\..\Source\SynEdit.pas"/>
-        <DCCReference Include="..\..\Source\SynEditAutoComplete.pas"/>
-        <DCCReference Include="..\..\Source\SynEditCodeFolding.pas"/>
-        <DCCReference Include="..\..\Source\SynEditDocumentManager.pas"/>
-        <DCCReference Include="..\..\Source\SynEditExport.pas"/>
-        <DCCReference Include="..\..\Source\SynEditHighlighter.pas"/>
-        <DCCReference Include="..\..\Source\SynEditKbdHandler.pas"/>
-        <DCCReference Include="..\..\Source\SynEditKeyCmdEditor.pas">
-            <Form>SynEditKeystrokeEditorForm</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\Source\SynEditKeyCmds.pas"/>
-        <DCCReference Include="..\..\Source\SynEditKeyCmdsEditor.pas">
-            <Form>SynEditKeystrokesEditorForm</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\Source\SynEditKeyConst.pas"/>
-        <DCCReference Include="..\..\Source\SynEditMiscClasses.pas"/>
-        <DCCReference Include="..\..\Source\SynEditMiscProcs.pas"/>
-        <DCCReference Include="..\..\Source\SynEditOptionsDialog.pas">
-            <Form>fmEditorOptionsDialog</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\Source\SynEditPlugins.pas"/>
-        <DCCReference Include="..\..\Source\SynEditWordWrap.pas"/>
-        <DCCReference Include="..\..\Source\SynEditPrint.pas"/>
-        <DCCReference Include="..\..\Source\SynEditPrinterInfo.pas"/>
-        <DCCReference Include="..\..\Source\SynEditPrintHeaderFooter.pas"/>
-        <DCCReference Include="..\..\Source\SynEditPrintMargins.pas"/>
-        <DCCReference Include="..\..\Source\SynEditPrintMarginsDialog.pas">
-            <Form>SynEditPrintMarginsDlg</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\Source\SynEditPrintPreview.pas"/>
-        <DCCReference Include="..\..\Source\SynEditPrintTypes.pas"/>
-        <DCCReference Include="..\..\Source\SynEditPythonBehaviour.pas"/>
-        <DCCReference Include="..\..\Source\SynEditRegexSearch.pas"/>
-        <DCCReference Include="..\..\Source\SynEditSearch.pas"/>
-        <DCCReference Include="..\..\Source\SynEditStrConst.pas"/>
-        <DCCReference Include="..\..\Source\SynEditTextBuffer.pas"/>
-        <DCCReference Include="..\..\Source\SynEditTypes.pas"/>
-        <DCCReference Include="..\..\Source\SynExportHTML.pas"/>
-        <DCCReference Include="..\..\Source\SynExportRTF.pas"/>
-        <DCCReference Include="..\..\Source\SynExportTeX.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterADSP21xx.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterAsm.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterAWK.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterBaan.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterBat.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterCAC.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterCache.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterCobol.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterCPM.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterCpp.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterCS.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterDfm.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterDml.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterFortran.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterFoxpro.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterGalaxy.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterGeneral.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterGWS.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterHashEntries.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterHaskell.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterHC11.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterHP48.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterHtml.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterIDL.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterIni.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterInno.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterJava.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterJScript.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterJSON.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterKix.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterM3.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterModelica.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterMsg.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterMulti.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterPas.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterPerl.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterPHP.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterProgress.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterPython.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterRC.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterRuby.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterSDD.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterSml.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterSQL.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterST.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterTclTk.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterTeX.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterUNIXShellScript.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterUnreal.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterVB.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterVBScript.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterXML.pas"/>
-        <DCCReference Include="..\..\Source\SynMacroRecorder.pas"/>
-        <DCCReference Include="..\..\Source\SynMemo.pas"/>
-        <DCCReference Include="..\..\Source\SynRegExpr.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterCss.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterLDraw.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterURI.pas"/>
-        <DCCReference Include="..\..\Source\SynURIOpener.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterDOT.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterDWS.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterVrml97.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterEiffel.pas"/>
-        <DCCReference Include="..\..\Source\SynUnicode.pas">
-            <Form>$IFNDEF CPUX64</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\Source\SynUsp10.pas">
-            <Form>$ENDIF</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\Source\SynEditHighlighterOptions.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterAsmMASM.pas"/>
-        <DCCReference Include="..\..\Source\SynHighlighterGo.pas"/>
-        <BuildConfiguration Include="Debug">
+        <ResFiles Include="..\..\Source\SynEditReg.dcr">
+            <BuildOrder>-1</BuildOrder>
+            <BuildOrder>23</BuildOrder>
+        </ResFiles>
+        <DelphiCompile Include="..\..\Source\SynEditReg.pas">
+            <BuildOrder>6</BuildOrder>
+            <BuildOrder>20</BuildOrder>
+        </DelphiCompile>
+        <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
         </BuildConfiguration>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
-        <BuildConfiguration Include="Release">
+        <BuildConfiguration Include="Debug">
             <Key>Cfg_1</Key>
             <CfgParent>Base</CfgParent>
         </BuildConfiguration>
     </ItemGroup>
+    <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
     <ProjectExtensions>
-        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
-        <Borland.ProjectType>Package</Borland.ProjectType>
+        <Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
+        <Borland.ProjectType>CppPackage</Borland.ProjectType>
         <BorlandProject>
-            <Delphi.Personality>
-                <Source>
-                    <Source Name="MainSource">SynEdit_R.dpk</Source>
-                </Source>
+            <CPlusPlusBuilder.Personality>
                 <VersionInfo>
-                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
                     <VersionInfo Name="AutoIncBuild">False</VersionInfo>
                     <VersionInfo Name="MajorVer">1</VersionInfo>
                     <VersionInfo Name="MinorVer">0</VersionInfo>
@@ -242,7 +219,7 @@
                     <VersionInfo Name="Special">False</VersionInfo>
                     <VersionInfo Name="Private">False</VersionInfo>
                     <VersionInfo Name="DLL">False</VersionInfo>
-                    <VersionInfo Name="Locale">1031</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
                     <VersionInfo Name="CodePage">1252</VersionInfo>
                 </VersionInfo>
                 <VersionInfoKeys>
@@ -257,15 +234,150 @@
                     <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
                     <VersionInfoKeys Name="Comments"/>
                 </VersionInfoKeys>
-            </Delphi.Personality>
+                <HistoryLists_hlIncludePath>
+                    <HistoryLists_hlIncludePath Name="Count">1</HistoryLists_hlIncludePath>
+                    <HistoryLists_hlIncludePath Name="Item0">..\..\Source;$(BCB)\include;$(BCB)\include\vcl</HistoryLists_hlIncludePath>
+                </HistoryLists_hlIncludePath>
+                <HistoryLists_hlLibraryPath>
+                    <HistoryLists_hlLibraryPath Name="Count">2</HistoryLists_hlLibraryPath>
+                    <HistoryLists_hlLibraryPath Name="Item0">..\..\Source;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\Source\Toolsapi</HistoryLists_hlLibraryPath>
+                    <HistoryLists_hlLibraryPath Name="Item1">..\..\Source;$(BCB)\lib\obj;$(BCB)\lib</HistoryLists_hlLibraryPath>
+                </HistoryLists_hlLibraryPath>
+                <HistoryLists_hlDebugSourcePath>
+                    <HistoryLists_hlDebugSourcePath Name="Count">1</HistoryLists_hlDebugSourcePath>
+                    <HistoryLists_hlDebugSourcePath Name="Item0">$(BCB)\source\vcl</HistoryLists_hlDebugSourcePath>
+                </HistoryLists_hlDebugSourcePath>
+                <HistoryLists_hlConditionals>
+                    <HistoryLists_hlConditionals Name="Count">1</HistoryLists_hlConditionals>
+                    <HistoryLists_hlConditionals Name="Item0">_DEBUG</HistoryLists_hlConditionals>
+                </HistoryLists_hlConditionals>
+                <HistoryLists_hlFinalOutputDir>
+                    <HistoryLists_hlFinalOutputDir Name="Count">4</HistoryLists_hlFinalOutputDir>
+                    <HistoryLists_hlFinalOutputDir Name="Item0">C:\Arquivos de programas\Borland\CBuilder6\Lib\</HistoryLists_hlFinalOutputDir>
+                    <HistoryLists_hlFinalOutputDir Name="Item1">C:\Arquivos de programas\Borland\CBuilder6\Lib</HistoryLists_hlFinalOutputDir>
+                    <HistoryLists_hlFinalOutputDir Name="Item2">$(BCB)\lib\</HistoryLists_hlFinalOutputDir>
+                    <HistoryLists_hlFinalOutputDir Name="Item3">$(BCB)\lib</HistoryLists_hlFinalOutputDir>
+                </HistoryLists_hlFinalOutputDir>
+                <Debugging>
+                    <Debugging Name="DebugSourceDirs">$(BCB)\source\vcl</Debugging>
+                </Debugging>
+                <Parameters>
+                    <Parameters Name="RunParams"/>
+                    <Parameters Name="Launcher"/>
+                    <Parameters Name="UseLauncher">False</Parameters>
+                    <Parameters Name="DebugCWD"/>
+                    <Parameters Name="HostApplication"/>
+                    <Parameters Name="RemoteHost"/>
+                    <Parameters Name="RemotePath"/>
+                    <Parameters Name="RemoteLauncher"/>
+                    <Parameters Name="RemoteCWD"/>
+                    <Parameters Name="RemoteDebug">False</Parameters>
+                    <Parameters Name="RemoteParams"/>
+                    <Parameters Name="UseRemoteLauncher">False</Parameters>
+                    <Parameters Name="Debug Symbols Search Path"/>
+                    <Parameters Name="LoadAllSymbols">True</Parameters>
+                    <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+                </Parameters>
+                <Compiler>
+                    <Compiler Name="ShowInfoMsgs">0</Compiler>
+                    <Compiler Name="LinkDebugVcl">0</Compiler>
+                    <Compiler Name="LinkCGLIB">0</Compiler>
+                </Compiler>
+                <CORBA>
+                    <CORBA Name="AddServerUnit">1</CORBA>
+                    <CORBA Name="AddClientUnit">1</CORBA>
+                    <CORBA Name="PrecompiledHeaders">1</CORBA>
+                </CORBA>
+                <ProjectProperties>
+                    <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
+                    <ProjectProperties Name="ManagePaths">True</ProjectProperties>
+                    <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
+                    <ProjectProperties Name="IndexFiles">False</ProjectProperties>
+                </ProjectProperties>
+                <Source>
+                    <Source Name="MainSource">SynEdit_BCB.cpp</Source>
+                </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k260.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp260.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </CPlusPlusBuilder.Personality>
             <Platforms>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">True</Platform>
+                <Platform value="Win64">False</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\19.0\Bpl\SynEdit_R102T.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c260.dll" Class="DependencyModule">
                     <Platform Name="Win32">
-                        <RemoteName>SynEdit_R.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgstl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32260mt.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32260.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin\borlndmm.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin64\borlndmm.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64260mt.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\SynEdit_BCB.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>SynEdit_BCB.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64260.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c260mt.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\SynEdit_BCB.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>SynEdit_BCB.tds</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgcrtl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -274,13 +386,18 @@
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="Win32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
                         <Operation>0</Operation>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="AndroidClassesDexFile">
                     <Platform Name="Android">
                         <RemoteDir>classes</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidFileProvider">
+                    <Platform Name="Android">
+                        <RemoteDir>res\xml</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -317,6 +434,12 @@
                 <DeployClass Name="AndroidSplashStyles">
                     <Platform Name="Android">
                         <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStylesV21">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values-v21</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -396,12 +519,20 @@
                         <Operation>1</Operation>
                         <Extensions>.framework</Extensions>
                     </Platform>
+                    <Platform Name="OSX64">
+                        <Operation>1</Operation>
+                        <Extensions>.framework</Extensions>
+                    </Platform>
                     <Platform Name="Win32">
                         <Operation>0</Operation>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="DependencyModule">
                     <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX64">
                         <Operation>1</Operation>
                         <Extensions>.dylib</Extensions>
                     </Platform>
@@ -427,6 +558,10 @@
                         <Operation>1</Operation>
                         <Extensions>.dylib</Extensions>
                     </Platform>
+                    <Platform Name="OSX64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
                     <Platform Name="Win32">
                         <Operation>0</Operation>
                         <Extensions>.bpl</Extensions>
@@ -446,6 +581,9 @@
                         <Operation>0</Operation>
                     </Platform>
                     <Platform Name="OSX32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
                         <Operation>0</Operation>
                     </Platform>
                     <Platform Name="Win32">
@@ -558,10 +696,15 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
+                <DeployClass Name="ProjectOSXDebug"/>
                 <DeployClass Name="ProjectOSXEntitlements"/>
                 <DeployClass Name="ProjectOSXInfoPList"/>
                 <DeployClass Name="ProjectOSXResource">
                     <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
                         <RemoteDir>Contents\Resources</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
@@ -586,6 +729,9 @@
                     <Platform Name="OSX32">
                         <Operation>1</Operation>
                     </Platform>
+                    <Platform Name="OSX64">
+                        <Operation>1</Operation>
+                    </Platform>
                     <Platform Name="Win32">
                         <Operation>0</Operation>
                     </Platform>
@@ -598,7 +744,7 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="UWP_DelphiLogo150">
+                <DeployClass Name="UWP_CppLogo150">
                     <Platform Name="Win32">
                         <RemoteDir>Assets</RemoteDir>
                         <Operation>1</Operation>
@@ -608,7 +754,7 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="UWP_DelphiLogo44">
+                <DeployClass Name="UWP_CppLogo44">
                     <Platform Name="Win32">
                         <RemoteDir>Assets</RemoteDir>
                         <Operation>1</Operation>
@@ -625,12 +771,12 @@
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
-    <Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
-    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
 </Project>
